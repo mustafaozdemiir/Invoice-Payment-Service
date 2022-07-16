@@ -2,6 +2,8 @@
 
 Evam java bootcamp invoice payment service project
 
+Swagger ui is available in the project. http://localhost:8080/swagger-ui.html#/
+
 # **CUSTOMER**
   ### **{"name": "Mustafa","surname": "ÖZDEMİR"}**
 * 1 => <span style="color:green">**[POST]**</span> http://localhost:8080/api/customer/add Adds new customer. (Takes parameters of type customer.) If successful, ResponseEntity<Customer> is returned. If unsuccessful, an error message("Customer not created!") is returned.
