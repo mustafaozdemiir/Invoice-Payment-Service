@@ -1,6 +1,6 @@
 # Invoice-Payment-Service
 
-Evam java bootcamp bill payment service project
+Evam java bootcamp invoice payment service project
 
 # **CUSTOMER**
   ### **{"name": "Mustafa","surname": "ÖZDEMİR"}**
