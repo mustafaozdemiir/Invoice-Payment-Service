@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InvoiceDao extends JpaRepository<Invoice,Long> {
 
+    // We fetch the invoice related to customerId and InvoiceId.
     @Query(value = "select * from invoices where id=:invoiceId and customer_id=:customerId",nativeQuery = true)
     Invoice getByCustomerIdAndInvoiceId(long invoiceId, long customerId);
 

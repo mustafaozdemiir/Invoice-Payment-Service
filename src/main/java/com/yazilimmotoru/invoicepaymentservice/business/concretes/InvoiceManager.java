@@ -11,12 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.Objects;
 
 @Service
 public class InvoiceManager implements InvoiceService {
-
     private InvoiceDao invoiceDao;
     private CustomerService customerService;
     private PaymentService paymentService;
@@ -29,12 +27,12 @@ public class InvoiceManager implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<Invoice> getById(long invoiceId) {
+    public ResponseEntity<Invoice> getById(long invoiceId) { // Invoice related to id is brought.
         return new ResponseEntity<Invoice>(this.invoiceDao.getById(invoiceId), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> findAll() { // Retrieves all generated invoices.
         try {
             return new ResponseEntity<>(invoiceDao.findAll(), HttpStatus.OK);
         } catch (Exception exception) {
@@ -43,7 +41,7 @@ public class InvoiceManager implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<?> save(long customerId, Invoice invoice) {
+    public ResponseEntity<?> save(long customerId, Invoice invoice) { // Saves a new invoice.
         try {
             Customer customer = (Customer) customerService.findByCustomerId(customerId).getBody();
             invoice.setCustomer(customer);
@@ -54,8 +52,8 @@ public class InvoiceManager implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<?> update(long invoiceId, double amount, boolean status) {
-        try {
+    public ResponseEntity<?> update(long invoiceId, double amount, boolean status) { // Updates the invoice.
+        try { // id finds the relevant invoice. Updates by adding new information.
             Invoice invoice;
             invoice = getById(invoiceId).getBody();
             if (Objects.nonNull(amount) && amount > 0) {
@@ -72,7 +70,7 @@ public class InvoiceManager implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<?> getByCustomerIdAndInvoiceId(long invoiceId, long customerId) {
+    public ResponseEntity<?> getByCustomerIdAndInvoiceId(long invoiceId, long customerId) { // Invoice related to customerId and invoiceId is fetched.
         try {
             return new ResponseEntity<>(this.invoiceDao.getByCustomerIdAndInvoiceId(invoiceId, customerId), HttpStatus.OK);
         } catch (Exception exception) {
@@ -81,8 +79,8 @@ public class InvoiceManager implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<?> pay(long invoiceId, long customerId) {
-        try {
+    public ResponseEntity<?> pay(long invoiceId, long customerId) { // Makes the invoice payment.
+        try { // Returns the unpaid invoice for invoiceId and customerId. Adds the invoice amount to the customer payment information total and changes the invoice's payment status.
             Invoice invoice;
             invoice = this.invoiceDao.getByCustomerIdAndInvoiceId(invoiceId, customerId);
             if (!invoice.isStatus()) {
@@ -101,7 +99,7 @@ public class InvoiceManager implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<?> deleteById(long id) {
+    public ResponseEntity<?> deleteById(long id) { // Deletes the invoice related to id.
         try{
             this.invoiceDao.deleteById(id);
             return new ResponseEntity<>("Invoice deleted",HttpStatus.OK);

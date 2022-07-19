@@ -9,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface PaymentDao extends JpaRepository<Payment,Long> {
-
+    // We bring the payment related to the customerId.
     @Query(value = "select * from payments where customer_id=:customerId",nativeQuery = true)
     Payment getByCustomerId(long customerId);
-
+    // We are deleting the payment associated with the customerId.
     @Modifying
     @Transactional
     @Query(value = "delete from payments where customer_id=:customerId",nativeQuery = true)

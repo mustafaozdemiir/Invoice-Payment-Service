@@ -3,7 +3,6 @@ package com.yazilimmotoru.invoicepaymentservice.api.controllers;
 import com.yazilimmotoru.invoicepaymentservice.business.abstracts.PaymentService;
 import com.yazilimmotoru.invoicepaymentservice.entities.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerDao extends JpaRepository<Customer,Long> {
+    // We fetch the customer related to customerId.
     @Query(value = "select * from customers where id=:customerId",nativeQuery = true)
     Customer findByCustomerId(long customerId);
 }

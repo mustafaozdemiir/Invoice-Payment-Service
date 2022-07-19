@@ -19,7 +19,7 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> findAll() { // It brings all the customers.
         try{
             return new ResponseEntity<>(customerDao.findAll(),HttpStatus.OK);
         }catch (Exception exception){
@@ -28,7 +28,7 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public ResponseEntity<?> findByCustomerId(Long id) {
+    public ResponseEntity<?> findByCustomerId(Long id) { // Brings the customer with the relevant id.
         try {
             return new ResponseEntity<>(this.customerDao.findByCustomerId(id),HttpStatus.OK);
         }catch (Exception exception){
@@ -36,7 +36,7 @@ public class CustomerManager implements CustomerService {
         }
     }
     @Override
-    public ResponseEntity<?> save(Customer customer) {
+    public ResponseEntity<?> save(Customer customer) { // New customer registers.
         try{
             return new ResponseEntity<>(this.customerDao.save(customer),HttpStatus.OK);
 
@@ -45,7 +45,7 @@ public class CustomerManager implements CustomerService {
         }
     }
     @Override
-    public ResponseEntity<?> deleteById(Long id) {
+    public ResponseEntity<?> deleteById(Long id) { // Deletes the customer with the corresponding id.
         try{
             this.customerDao.deleteById(id);
             return new ResponseEntity<>("Deleted by "+id,HttpStatus.OK);
@@ -54,8 +54,8 @@ public class CustomerManager implements CustomerService {
         }
     }
     @Override
-    public ResponseEntity<?> update(Long customerId,String name,String surname) {
-        try{
+    public ResponseEntity<?> update(Long customerId,String name,String surname) { // Updates customer information.
+        try{ // Finds the relevant customer by id. Adds and updates new information.
         Customer customer;
         customer=this.customerDao.getById(customerId);
         if (Objects.nonNull(name)&&!name.isEmpty()){
